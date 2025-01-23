@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Items</h1>
+
+<!-- Форма для добавления нового элемента -->
+<form method="POST">
+    <input type="text" name="name" placeholder="Item Name" required>
+    <input type="text" name="description" placeholder="Description">
+    <button type="submit">Add Item</button>
+</form>
+
+<!-- Список существующих элементов -->
+<ul>
+    {% for item in items %}
+    <li>
+        <strong>{{ item.name }}</strong>: {{ item.description }}
+        <!-- Ссылка на редактирование -->
+        <a href="{{ url_for('main.update_item', id=item.id) }}">Edit</a>
+        <!-- Ссылка на удаление -->
+        <a href="{{ url_for('main.delete_item', id=item.id) }}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
