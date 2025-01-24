@@ -62,13 +62,11 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4727B260639942A89E2D7B5D250A6D29 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5009FA2FDA6B423A9FA5FDAC5F88D81A }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0F0F077A18F3408DA321121B290DE36C }}
+          # Использование OIDC для автоматической аутентификации
+          identity: 'repo:Zipper999/Nazar-Mamedov:ref:refs/heads/main' 
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -76,4 +74,3 @@ jobs:
         with:
           app-name: 'final'
           slot-name: 'Production'
-          
