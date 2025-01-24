@@ -65,9 +65,8 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          # Использование OIDC для автоматической аутентификации
-          identity: 'repo:Zipper999/Nazar-Mamedov:ref:refs/heads/main' 
-
+          auth-type: 'cli'  # Use CLI authentication (OIDC will be handled by Azure CLI)
+      
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
